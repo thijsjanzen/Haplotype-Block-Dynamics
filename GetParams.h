@@ -14,8 +14,6 @@ public:
 	template <typename T>
 	void readNameValuePair( std::stringstream& ss, std::string iniName, T& value );
 	
-
-
 	//GLOBAL VARIABLES
 	int seed;
 	int refit;
@@ -23,9 +21,6 @@ public:
 	int genomeSize;
 	double initRatio;
 	int maxTime;
-	int allOutput;
-	int infer;
-	
 	
 	double meanBlockSize;
 	

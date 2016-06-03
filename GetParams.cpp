@@ -45,12 +45,10 @@ void GetParams::readFromIni( const char * filename ) {
 				readNameValuePair( ss,  "genomeSize", genomeSize);
 				readNameValuePair( ss,  "initRatio", initRatio);
 				readNameValuePair( ss,  "maxTime", maxTime);
-				readNameValuePair( ss,  "allOutput", allOutput);
 				readNameValuePair( ss,  "recomDist",recomDist);
 				readNameValuePair( ss,  "replicates",replicates);
 				readNameValuePair( ss,  "selfing",selfing);
 				readNameValuePair( ss,  "numRecombinations",numberRecombinations);
-		
 	}
 }
 
@@ -66,7 +64,6 @@ void GetParams::readNameValuePair( std::stringstream& ss, std::string iniName, T
 		throw "text format of ini file is not compatible";
     ss >> value;
 	std::cout << iniName << ": " << value << std::endl;
-//	std::cerr << iniName << ": " << value << std::endl;
 }
 
 

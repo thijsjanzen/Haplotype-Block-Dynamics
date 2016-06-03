@@ -22,7 +22,7 @@ struct Fish
 	{
 		
 	}
-	
+	//constructor that sets all genome elements to "initLoc"
 	Fish(const bool initLoc, const int genomeSize)
 	{
 		for(int i = 0; i < genomeSize; ++i)
@@ -32,6 +32,7 @@ struct Fish
 		}
 	}
 	
+	//copy constructor
 	Fish(const std::vector<bool>& A, const std::vector<bool>& B)
 	{
 		chromosome1 = A;
@@ -39,6 +40,7 @@ struct Fish
 	}
 };
 
+//mating function
 Fish mate(const Fish& A, const Fish& B, int recomDist, double numberRecombinations);
 
 #endif /* defined(__SecondaryContact__Fish__) */
