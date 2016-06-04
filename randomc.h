@@ -93,16 +93,16 @@
 * GNU General Public License http://www.gnu.org/licenses/gpl.html
 *******************************************************************************/
 
-#ifndef RANDOMC_H
-#define RANDOMC_H
+#ifndef FINITE_CHROMOSOME_ALWAYS_RECOM_RANDOMC_H_
+#define FINITE_CHROMOSOME_ALWAYS_RECOM_RANDOMC_H_
 
 // Define integer types with known size: int32_t, uint32_t, int64_t, uint64_t.
 // If this doesn't work then insert compiler-specific definitions here:
 #if defined(__GNUC__) || (defined(_MSC_VER) && _MSC_VER >= 1600)
   // Compilers supporting C99 or C++0x have stdint.h defining these integer types
   #include <stdint.h>
-  #define INT64_SUPPORTED // Remove this if the compiler doesn't support 64-bit integers
-#elif defined(_WIN16) || defined(__MSDOS__) || defined(_MSDOS) 
+  #define INT64_SUPPORTED  // Remove this if the compiler doesn't support 64-bit integers
+#elif defined(_WIN16) || defined(__MSDOS__) || defined(_MSDOS)
   // 16 bit systems use long int for 32 bit integer.
   typedef   signed long int int32_t;
   typedef unsigned long int uint32_t;
@@ -112,14 +112,14 @@
   typedef unsigned __int32 uint32_t;
   typedef   signed __int64  int64_t;
   typedef unsigned __int64 uint64_t;
-  #define INT64_SUPPORTED // Remove this if the compiler doesn't support 64-bit integers
+  #define INT64_SUPPORTED  // Remove this if the compiler doesn't support 64-bit integers
 #else
   // This works with most compilers
   typedef signed int          int32_t;
   typedef unsigned int       uint32_t;
   typedef long long           int64_t;
   typedef unsigned long long uint64_t;
-  #define INT64_SUPPORTED // Remove this if the compiler doesn't support 64-bit integers
+  #define INT64_SUPPORTED  // Remove this if the compiler doesn't support 64-bit integers
 #endif
 
 
@@ -127,18 +127,17 @@
 System-specific user interface functions
 ***********************************************************************/
 
-void EndOfProgram(void);               // System-specific exit code (userintf.cpp)
+void EndOfProgram(void);                 // System-specific exit code (userintf.cpp)
 
-void FatalError(const char *ErrorText);// System-specific error reporting (userintf.cpp)
+void FatalError(const char *ErrorText);  // System-specific error reporting (userintf.cpp)
 
-#if defined(__cplusplus)               // class definitions only in C++
 /***********************************************************************
 Define random number generator classes
 ***********************************************************************/
 
 class CRandomMersenne {                // Encapsulate random number generator
 // Choose which version of Mersenne Twister you want:
-#if 0 
+#if 0
 // Define constants for type MT11213A:
 #define MERS_N   351
 #define MERS_M   175
@@ -150,7 +149,7 @@ class CRandomMersenne {                // Encapsulate random number generator
 #define MERS_A   0xE4BD75F5
 #define MERS_B   0x655E5280
 #define MERS_C   0xFFD58000
-#else    
+#else
 // or constants for type MT19937:
 #define MERS_N   624
 #define MERS_M   397
@@ -164,37 +163,33 @@ class CRandomMersenne {                // Encapsulate random number generator
 #define MERS_C   0xEFC60000
 #endif
 
-public:
-   CRandomMersenne(int seed) {         // Constructor
-	   RandomInit(seed); LastInterval = 0; normal_x2_valid = 0;}
-	
-   void RandomInit(int seed);          // Re-seed
-   void RandomInitByArray(int const seeds[], int NumSeeds); // Seed by more than 32 bits
-   int IRandom (int min, int max);     // Output random integer
-   int IRandomX(int min, int max);     // Output random integer, exact
-   double Random();                    // Output random float
-   uint32_t BRandom();                 // Output random bits
-	
-   double normal(double m, double s);  //included from stocc package
-	
-private:
-   void Init0(int seed);               // Basic initialization procedure
-   uint32_t mt[MERS_N];                // State vector
-   int mti;                            // Index into mt
-   uint32_t LastInterval;              // Last interval length for IRandomX
-   uint32_t RLimit;                    // Rejection limit used by IRandomX
-	double normal_x2;
-	bool normal_x2_valid;
-};
+ public:
+    CRandomMersenne(int seed) {         // Constructor
+        RandomInit(seed); LastInterval = 0; normal_x2_valid = 0;
+    }
 
+    void RandomInit(int seed);          // Re-seed
+    void RandomInitByArray(int const seeds[], int NumSeeds);  // Seed by more than 32 bits
+    int IRandom(int min, int max);      // Output random integer
+    int IRandomX(int min, int max);     // Output random integer, exact
+    double Random();                    // Output random float
+    uint32_t BRandom();                 // Output random bits
+
+    double normal(double m, double s);  // included from stocc package
+
+ private:
+    void Init0(int seed);               // Basic initialization procedure
+    uint32_t mt[MERS_N];                // State vector
+    int mti;                            // Index into mt
+    uint32_t LastInterval;              // Last interval length for IRandomX
+    uint32_t RLimit;                    // Rejection limit used by IRandomX
+    double normal_x2;
+    bool normal_x2_valid;
+};
 
 void set_seed(int seed);
 double uniform();
 int random_number(int n);
 double normal(double m, double s);
 
-
-
-
-#endif // __cplusplus
-#endif // RANDOMC_H
+#endif  // FINITE_CHROMOSOME_ALWAYS_RECOM_RANDOMC_H_
