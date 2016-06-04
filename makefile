@@ -1,5 +1,5 @@
-all: run
+all: test
 
-run : main.cpp mersenne.cpp GetParams.cpp Fish.cpp
-	g++ main.cpp mersenne.cpp GetParams.cpp Fish.cpp -Wall -std=c++11 -O3 -o run
+test : main.cpp mersenne.cpp GetParams.cpp Fish.cpp
+	g++ main.cpp mersenne.cpp GetParams.cpp Fish.cpp -Wall -O3 -o run
 
