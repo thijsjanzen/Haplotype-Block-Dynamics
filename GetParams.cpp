@@ -15,10 +15,8 @@ GetParams::GetParams() {
 	genomeSize = 1000;
 	initRatio = 0.5;
 	maxTime = 201;
-	allOutput = 0;
 	meanBlockSize = -10;
 	
-	infer = 1;
 	replicates = 1;
 	
 	secondStep = false;
